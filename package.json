@@ -1,14 +1,20 @@
 {
-  "name": "playwright-avito",
+  "name": "avitotestautomation",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "test:debug": "npx playwright test --debug",
+    "test:allure": "ALLURE_RESULTS_DIR=my-allure-results npx playwright test --reporter=list,allure-playwright"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.43.1",
-    "@types/node": "^20.12.7"
+    "@playwright/test": "^1.41.2",
+    "@types/node": "^20.11.19",
+    "allure-playwright": "^2.12.2",
+    "dotenv": "^16.4.5"
   }
 }
