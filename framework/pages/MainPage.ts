@@ -1,29 +1,23 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { Input } from '../controls/Input';
 
 export class MainPage extends BasePage {
     readonly loginBtn: Locator;
-    readonly signUpBtn: Locator;
+    readonly searchBtn: Locator;
+    readonly searchInput: Input;
 
     constructor(currentPage: Page) {
         super(currentPage);
 
         this.loginBtn = this.currentPage
         .getByRole('link')
-        .filter({ hasText: 'Log In' });
+        .filter({ hasText: 'Вход и регистрация' });
 
-        this.signUpBtn = this.currentPage
-        .getByRole('link')
-        .filter({ hasText: 'Sign Up' });
+        this.searchBtn = this.currentPage
+        .getByRole('button')
+        .filter({ hasText: 'Найти' });
+
+        this.searchInput = new Input(this.currentPage, 'Поиск по объявлениям');
     }
-
-//   async openTermsModal() {
-//     await this.termsLink.click();
-//     expect(this.termsModal.locator).toBeVisible();
-//   }
-
-//   async openPrivacyPolicy() {
-//     await this.privacyPolicyLink.click();
-//     expect(this.privacyPolicyModal.locator).toBeVisible();
-//   }
 }
