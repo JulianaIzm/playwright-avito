@@ -8,10 +8,11 @@ import { Locator, Page } from '@playwright/test';
 export class Input {
     readonly locator: Locator; // to be improved
     constructor(readonly currentPage: Page, readonly locatorStr: string) {
-        this.locator = currentPage.getByText(locatorStr);
+        this.locator = currentPage.getByTestId(locatorStr);
     }
 
     async clear(): Promise<void> {
+        console.log(this.locator);
         await this.locator.fill('');
     }
 

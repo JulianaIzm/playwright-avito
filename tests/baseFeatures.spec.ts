@@ -18,19 +18,19 @@ test.describe('Avito base features check', () => {
         await mainPage.searchInput.set('Мотоциклы')
         await mainPage.searchBtn.click();
         
-        await expect(page.locator('xpath=//h1')).toBeVisible();
+        await mainPage.searchResultTitle.testSignTitle(await mainPage.searchInput.value());
         });
 
-        await test.step('Check if only Motorcycles in search result', async () => {
-            // Assuming there's a title or class on the search results
-            const searchResults = page.locator('xpath=//h1');
-            await expect(searchResults).toBeVisible();
-            const searchResultTitles = await searchResults.allTextContents();
+        // await test.step('Check if only Motorcycles in search result', async () => {
+        //     // Assuming there's a title or class on the search results
+        //     const searchResults = page.locator('xpath=//h1');
+        //     await expect(searchResults).toBeVisible();
+        //     const searchResultTitles = await searchResults.allTextContents();
             
-            for (const title of searchResultTitles) {
-                // Ensure every title contains "Мотоцикл"
-                expect(title).toContain('Мотоцикл');
-            }
-        });
+        //     for (const title of searchResultTitles) {
+        //         // Ensure every title contains "Мотоцикл"
+        //         expect(title).toContain('Мотоцикл');
+        //     }
+        // });
     });
 });
