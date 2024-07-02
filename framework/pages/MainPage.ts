@@ -7,7 +7,7 @@ export class MainPage extends BasePage {
     readonly loginBtn: Locator;
     readonly searchBtn: Locator;
     readonly searchInput: Input;
-    readonly searchResultTitle: SignCard;
+    readonly searchResults: SignCard;
 
     constructor(currentPage: Page) {
         super(currentPage);
@@ -21,6 +21,6 @@ export class MainPage extends BasePage {
         .filter({ hasText: 'Найти' });
 
         this.searchInput = new Input(this.currentPage, 'search-form/suggest');
-        this.searchResultTitle = new SignCard(this.currentPage, 'item-title');
+        this.searchResults = new SignCard(this.currentPage, 'item-title');
     }
 }

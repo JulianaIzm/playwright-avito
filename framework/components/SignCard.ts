@@ -11,7 +11,13 @@ export class SignCard {
     }
 
     async testSignTitle(text: string) {
-        await expect(this.locator).toContainText(text);
+        const searchResults = this.locator;
+        const searchResultTitles = await searchResults.allTextContents();
+        const wordRegex = new RegExp(`${text}`);
+            
+        for (const title of searchResultTitles) {
+            expect(title).toMatch(wordRegex);
+        }
     }
 
     async test() {
