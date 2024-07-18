@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
-    "test:debug": "npx playwright test --debug",
-    "test:allure": "ALLURE_RESULTS_DIR=my-allure-results npx playwright test --reporter=list,allure-playwright"
+    "test:debug": "npx playwright test --debug"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +13,6 @@
   "devDependencies": {
     "@playwright/test": "^1.41.2",
     "@types/node": "^20.11.19",
-    "allure-playwright": "^2.12.2",
     "dotenv": "^16.4.5"
   }
 }

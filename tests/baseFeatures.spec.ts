@@ -15,10 +15,19 @@ test.describe('Avito base features check', () => {
 
     test('Search bikes check', async ({ page, mainPage }) => {
         await test.step('You are on main page, search bikes', async () => {
-        await mainPage.searchInput.set('мото')
-        await mainPage.searchBtn.click();
-        
-        await mainPage.searchResults.testSignTitle(await mainPage.searchInput.value());
+            const searchData = { type: 'мотоцикл', brand: 'Yamaha', model: 'Stryker' };
+            await mainPage.searchInput.set(
+                `${searchData.type} ${searchData.brand} ${searchData.model}`,
+            );
+            await mainPage.searchBtn.click();
+            await mainPage.currentPage.waitForLoadState();
+
+            const elementLocator = mainPage.searchResultCards.title;
+
+            await elementLocator.waitForElementState('visible');
+            await mainPage.currentPage.locator('item-view/title-info').waitForElementState('visible');
+            await mainPage.searchResultCards.openSignCard()            
+            await mainPage.searchResultCards.testSignCard(await mainPage.searchInput.value());
         });
     });
 });

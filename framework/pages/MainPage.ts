@@ -1,13 +1,13 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { Input } from '../controls/Input';
-import { SignCard } from '../components';
+import { SearchResultCard } from '../components';
 
 export class MainPage extends BasePage {
     readonly loginBtn: Locator;
     readonly searchBtn: Locator;
     readonly searchInput: Input;
-    readonly searchResults: SignCard;
+    readonly searchResultCards: SearchResultCard;
 
     constructor(currentPage: Page) {
         super(currentPage);
@@ -21,6 +21,5 @@ export class MainPage extends BasePage {
         .filter({ hasText: 'Найти' });
 
         this.searchInput = new Input(this.currentPage, 'search-form/suggest');
-        this.searchResults = new SignCard(this.currentPage, 'item-title');
     }
 }

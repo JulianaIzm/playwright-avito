@@ -12,7 +12,6 @@ export class Input {
     }
 
     async clear(): Promise<void> {
-        console.log(this.locator);
         await this.locator.fill('');
     }
 
