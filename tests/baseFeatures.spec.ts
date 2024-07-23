@@ -22,12 +22,9 @@ test.describe('Avito base features check', () => {
             await mainPage.searchBtn.click();
             await mainPage.currentPage.waitForLoadState();
 
-            const elementLocator = mainPage.searchResultCards.title;
-
-            await elementLocator.waitForElementState('visible');
-            await mainPage.currentPage.locator('item-view/title-info').waitForElementState('visible');
-            await mainPage.searchResultCards.openSignCard()            
-            await mainPage.searchResultCards.testSignCard(await mainPage.searchInput.value());
+            //await mainPage.searchResultLinks.initializeCardTitleLinks(page, 'item-title');
+            await mainPage.searchResultLinks.clickSignCard();           
+            await mainPage.signCard.testDefaultState();
         });
     });
 });
