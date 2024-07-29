@@ -22,7 +22,7 @@ export class MainPage extends BasePage {
         .filter({ hasText: 'Найти' });
 
         this.searchInput = new Input(this.currentPage, 'search-form/suggest');
-        //this.searchResultLinks = new SearchResultCards(this.currentPage, 'item-title');
+        this.searchResultLinks = new SearchResultCards(this.currentPage, 'item-title');
         this.signCard = new SignCard(this.currentPage);
     }
 }
