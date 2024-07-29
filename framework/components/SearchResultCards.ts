@@ -5,10 +5,12 @@ export class SearchResultCards {
     private cardTitleLinks: Locator[] = [];
     constructor(currentPage: Page, searchString: string) {
         this.locator = currentPage.getByTestId(searchString);
-        this.initializeCardTitleLinks(currentPage, 'item-title');
     }
 
     async initializeCardTitleLinks(currentPage: Page, searchString: string) {
+        if (this.cardTitleLinks.length === 0) {
+            throw new Error('Card title links not initialized');
+        }
         this.cardTitleLinks = await currentPage.getByTestId(searchString).all();
     }
 
@@ -17,18 +19,9 @@ export class SearchResultCards {
     }
 
     async clickSignCard() {
-        const randomIndices = [];
-        while (randomIndices.length < 3) {
-            const randomIndex = Math.floor(Math.random() * this.cardTitleLinks.length);
-            if (!randomIndices.includes(randomIndex)) {
-            randomIndices.push(randomIndex);
-            }
-        }
-
-        for (const index of randomIndices) {
-            const randomH3 = this.cardTitleLinks[index];
-            await randomH3.click();
-        }
+        const randomIndex = Math.floor(Math.random() * this.cardTitleLinks.length);
+        const randomCardTitle = this.cardTitleLinks[randomIndex];
+        await randomCardTitle.click();
     }
 
     async test() {

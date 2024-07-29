@@ -1,5 +1,6 @@
 import { test as base, expect } from '@playwright/test';
 import { MainPage } from '../framework/pages';
+import { SearchResultCards } from '../framework/components';
 
 const test = base.extend<{ mainPage: MainPage }>({
     mainPage: async ({ page }, use) => {
@@ -22,7 +23,7 @@ test.describe('Avito base features check', () => {
             await mainPage.searchBtn.click();
             await mainPage.currentPage.waitForLoadState();
 
-            //await mainPage.searchResultLinks.initializeCardTitleLinks(page, 'item-title');
+            await mainPage.searchResultLinks.initializeCardTitleLinks(page, 'item-title');
             await mainPage.searchResultLinks.clickSignCard();           
             await mainPage.signCard.testDefaultState();
         });
