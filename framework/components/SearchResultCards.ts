@@ -9,7 +9,6 @@ export class SearchResultCards {
 
     async initializeCardTitleLinks(currentPage: Page, searchString: string) {
         if (this.cardTitleLinks.length === 0) {
-            //throw new Error('Card title links not initialized');
             this.cardTitleLinks = await currentPage.getByTestId('item-title').all();
         }
         this.cardTitleLinks = await currentPage.getByTestId(searchString).all();
