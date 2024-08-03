@@ -1,15 +1,11 @@
 import { test as base, expect } from '@playwright/test';
 import { MainPage } from '../framework/pages';
-import { SignCard } from '../framework/components';
+import { AnnouncementPage } from '../framework/pages';
 
-const test = base.extend<{ mainPage: MainPage, cardPage: SignCard }>({
+const test = base.extend<{ mainPage: MainPage }>({
     mainPage: async ({ page }, use) => {
         const mainPage = new MainPage(page);
         await use(mainPage);
-    },
-    cardPage: async ({ page }, use) => {
-        const cardPage = new SignCard(page);
-        await use(cardPage);
     },
 });
 
@@ -18,18 +14,20 @@ test.describe('Avito base features check', () => {
         await page.goto('/');
     });
 
-    test('Search bikes check', async ({ page, mainPage, cardPage }) => {
+    test('Search bikes check', async ({ page, mainPage }) => {
         await test.step('You are on main page, search bikes', async () => {
-            const searchData = { type: 'мотоцикл', brand: 'Yamaha', year: 2013 };
+            const searchData = { brand: 'Yamaha', model: 'BMW R1200R', year: 2013 };
             await mainPage.searchInput.set(
-                `${searchData.type} ${searchData.brand} ${searchData.year}`,
+                `${searchData.brand} ${searchData.model} ${searchData.year}`,
             );
             await mainPage.searchBtn.click();
             await mainPage.currentPage.waitForLoadState();
 
             await mainPage.searchResultLinks.initializeCardTitleLinks(page, 'item-title');
-            await mainPage.searchResultLinks.clickSignCard();           
-            await cardPage.testSignCard(searchData);
+            await mainPage.searchResultLinks.clickSearchResultCard(); 
+            
+            const announcement = new AnnouncementPage(mainPage.currentPage);
+            await announcement.test(searchData);
         });
     });
 });

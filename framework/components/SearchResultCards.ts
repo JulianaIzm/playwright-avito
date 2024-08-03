@@ -10,15 +10,16 @@ export class SearchResultCards {
     async initializeCardTitleLinks(currentPage: Page, searchString: string) {
         if (this.cardTitleLinks.length === 0) {
             this.cardTitleLinks = await currentPage.getByTestId('item-title').all();
+        } else {
+            this.cardTitleLinks = await currentPage.getByTestId(searchString).all();
         }
-        this.cardTitleLinks = await currentPage.getByTestId(searchString).all();
     }
 
     async testDefaultState() {
         await expect(this.locator).toBeVisible();
     }
 
-    async clickSignCard() {
+    async clickSearchResultCard() {
         const randomIndex = Math.floor(Math.random() * this.cardTitleLinks.length);
         const randomCardTitle = this.cardTitleLinks[randomIndex];
         await randomCardTitle.click();
