@@ -26,7 +26,7 @@ export class AnnouncementPage extends BasePage{
         
         expect(await this.title.textContent()).toBe(searchData.type);
         expect(await this.model.textContent()).toBe(searchData.brand);
-        //expect(yearText).toBeGreaterThanOrEqual(2010);
-        //expect(yearText).toBeLessThan(2015);
+        expect(this.year.textContent()).toBeGreaterThanOrEqual(searchData.timePeriod.start);
+        expect(this.year.textContent()).toBeLessThan(searchData.timePeriod.end);
     }
 }
