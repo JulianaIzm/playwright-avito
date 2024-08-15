@@ -1,13 +1,14 @@
 import { Locator, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { Input } from '../controls/Input';
-import { SearchResultCards } from '../components';
 
 export class MainPage extends BasePage {
     readonly loginBtn: Locator;
     readonly searchBtn: Locator;
     readonly searchInput: Input;
-    readonly searchResultLinks: SearchResultCards;
+    readonly categoryForAuto: Locator;
+    readonly categoryForMoto: Locator;
+
 
     constructor(currentPage: Page) {
         super(currentPage);
@@ -21,6 +22,7 @@ export class MainPage extends BasePage {
         .filter({ hasText: 'Найти' });
 
         this.searchInput = new Input(this.currentPage, 'search-form/suggest');
-        this.searchResultLinks = new SearchResultCards(this.currentPage, 'item-title');
+        this.categoryForAuto = this.currentPage.getByTestId('visual-rubricator/block-Авто').first();
+        this.categoryForMoto = this.currentPage.getByTestId('visual-rubricator/block-Мотоциклы и мототехника').first();
     }
 }
