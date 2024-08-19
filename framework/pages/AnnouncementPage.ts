@@ -19,13 +19,14 @@ export class AnnouncementPage extends BasePage{
             this.model.textContent(),
             this.year.textContent(),
         ]);
-        
-        const brand = brandText?.split(':')[1]?.trim();
-        const model = modelText?.split(':')[1]?.trim();
-        const year = parseInt((yearText?.split(':')[1]?? '').trim());
+
+        const brand = brandText?.match(/(?<=Марка:\s*)\w+/)?.[0];
+        const model = modelText?.match(/(?<=Модель:\s*)\w+(?:\s+\w+)*/)?.[0]?.replace(/\s/g, '');
+        const yearMatch = yearText?.match(/(?<=Год выпуска:\s*)\d+/);
+        const year = yearMatch ? parseInt(yearMatch[0]) : null;
         
         expect(brand).toBe(searchData.brand);
-        expect(model?.replace(/\s/g, '')).toBe(searchData.model);
+        expect(model).toBe(searchData.model);
         expect(year).toBeGreaterThanOrEqual(searchData.timePeriod.start);
         expect(year).toBeLessThan(searchData.timePeriod.end);
     }
