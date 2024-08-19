@@ -20,9 +20,9 @@ export class AnnouncementPage extends BasePage{
             this.year.textContent(),
         ]);
 
-        const brand = brandText?.match(/(?<=Марка:\s*)\w+/)?.[0];
-        const model = modelText?.match(/(?<=Модель:\s*)\w+(?:\s+\w+)*/)?.[0]?.replace(/\s/g, '');
-        const yearMatch = yearText?.match(/(?<=Год выпуска:\s*)\d+/);
+        const brand = brandText?.match(/\w+/)?.[0];
+        const model = modelText?.match(/\w+(?:\s+\w+)*/)?.[0]?.replace(/\s/g, '');
+        const yearMatch = yearText?.match(/\d+/);
         const year = yearMatch ? parseInt(yearMatch[0]) : null;
         
         expect(brand).toBe(searchData.brand);
