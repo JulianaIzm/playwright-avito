@@ -14,28 +14,26 @@ const test = base.extend<{ mainPage: MainPage, searchResultPage: SearchResultPag
 });
 
 test.describe('Avito base features check', () => {
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page, mainPage }) => {
         await page.goto('/', {waitUntil: "commit"});
-    });
-
-    test('Search bikes check', async ({ mainPage, searchResultPage, context }) => {
-        await test.step('You are on main page, search bikes', async () => {
-            const searchData = { brand: 'BMW', model: 'R1200R', year: 2013 , timePeriod: {start: 2010, end: 2014}};
-
-            await mainPage.categoryForAuto.click();
+        await mainPage.categoryForAuto.click();
             await mainPage.currentPage.waitForLoadState("domcontentloaded");
             await mainPage.categoryForMoto.click();
             await mainPage.currentPage.waitForLoadState("domcontentloaded");
+    });
+
+    test('Search bikes check', async ({ mainPage, searchResultPage, context }) => {
+        await test.step('You look for bikes and check the validity of data', async () => {
+            const searchData = { brand: 'BMW', model: 'R1200R', year: 2013 , timePeriod: {start: 2010, end: 2014}};
             await mainPage.searchInput.set(`${searchData.brand} ${searchData.model} ${searchData.year}`);
             await mainPage.searchBtn.click();
             await mainPage.currentPage.waitForLoadState("domcontentloaded");
-
             const [newPage] = await Promise.all([
                 context.waitForEvent('page'),
                 searchResultPage.clickRandomCard()
             ]);
-            const annPage = new AnnouncementPage(newPage);
-            await annPage.test(searchData);
+            const announcementPage = new AnnouncementPage(newPage);
+            await announcementPage.test(searchData);
         })
     })
 });
