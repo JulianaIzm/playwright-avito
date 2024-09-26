@@ -1,14 +1,18 @@
 {
-  "name": "playwright-avito",
+  "name": "avitotestautomation",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "test:debug": "npx playwright test --debug"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.43.1",
-    "@types/node": "^20.12.7"
+    "@playwright/test": "^1.41.2",
+    "@types/node": "^20.11.19",
+    "dotenv": "^16.4.5"
   }
 }
